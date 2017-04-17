@@ -56,17 +56,18 @@ passport.use(
                   return cb(null, user);
                 }
               );
+          } else {
+            User
+            .findOneAndUpdate({
+              googleId: users[0].googleId}, {$set: {accessToken: accessToken}
+            }, {new: true})
+            .then(
+              user => {
+                console.log('afterupdate', user)
+                return cb(null, user);
+              }
+            )
           }
-
-          User
-          .update({
-            googleId: users[0].googleId}, {$set: {accessToken: accessToken}
-          })
-          .then(
-            user => {
-              return cb(null, user);
-            }
-          )
         });
     }
 ));
