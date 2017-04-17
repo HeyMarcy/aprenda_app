@@ -96,12 +96,18 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 });
 
 let server;
+let DATABASE_URL='mongodb://localhost/myapp';
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-        server = app.listen(port, () => {
-            resolve();
-        }).on('error', reject);
+      mongoose.connect(process.env.DATABAE_URL || DATABASE_URL, err => {
+         if (err && callback) {
+           return callback(err);
+         }
+         server = app.listen(port, () => {
+              resolve();
+          }).on('error', reject);
     });
+  });
 }
 
 function closeServer() {
