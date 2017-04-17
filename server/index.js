@@ -3,10 +3,16 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+const User = require('./models/user-model');
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET
+  CLIENT_SECRET: process.env.CLIENT_SECRET,
+  DB_URL: process.env.DB_URL
 }
 
 if(process.env.NODE_ENV != 'production') {
@@ -31,13 +37,41 @@ passport.use(
         // google id, and the access token
         // Job 2: Update this callback to either update or create the user
         // so it contains the correct access token
-        const user = database[accessToken] = {
-            googleId: profile.id,
-            accessToken: accessToken
-        };
-        return cb(null, user);
+
+        User
+        .find({
+          'googleId': profile.id
+        })
+        .then(
+          users => {
+          console.log(users)
+          if (!users[0]) {
+            User
+              .create({
+                googleId: profile.id,
+                accessToken: accessToken
+              })
+              .then(
+                user => {
+                  return cb(null, user);
+                }
+              );
+          }
+
+          User
+          .update({
+            googleId: users[0].googleId}, {$set: {accessToken: accessToken}
+          })
+          .then(
+            user => {
+              return cb(null, user);
+            }
+          )
+        });
     }
 ));
+
+
 
 passport.use(
     new BearerStrategy(
@@ -45,10 +79,20 @@ passport.use(
             // Job 3: Update this callback to try to find a user with a
             // matching access token.  If they exist, let em in, if not,
             // don't.
-            if (!(token in database)) {
+
+            User
+            .find({
+              'accessToken': token
+            })
+            .then(
+              users => {
+              console.log(users)
+              if (!users[0]) {
                 return done(null, false);
-            }
-            return done(null, database[token]);
+              }
+              return done(null, users[0]);
+              }
+          )
         }
     )
 );
@@ -96,31 +140,27 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 });
 
 let server;
-/*
-//let DATABASE_URL='mongodb://localhost/myapp';
-function runServer(port=3001) {
+
+function runServer(port=3001, databaseUrl=secret.DB_URL) {
     return new Promise((resolve, reject) => {
-      //mongoose.connect(process.env.DATABAE_URL || DATABASE_URL, err => {
-         if (err && callback) {
-           return callback(err);
-         }
-         server = app.listen(port, () => {
-              resolve();
-          }).on('error', reject);
-    });
-  });
-}
-*/
-function runServer(port=3001) {
-    return new Promise((resolve, reject) => {
+        mongoose.connect(databaseUrl, err => {
+          if (err) {
+            return reject(err);
+          }
+
         server = app.listen(port, () => {
             resolve();
-        }).on('error', reject);
+        }).on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
+      });
     });
 }
 
 
 function closeServer() {
+  return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
         server.close(err => {
             if (err) {
@@ -129,6 +169,7 @@ function closeServer() {
             resolve();
         });
     });
+  });
 }
 
 if (require.main === module) {
