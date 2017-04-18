@@ -1,4 +1,4 @@
-import (START_QUIZ, SUBMIT_ANSWER) from '../actions/index';
+import * as actions from '../actions/index';
 
 const initialState = {
   questions: [],
@@ -8,15 +8,17 @@ const initialState = {
 };
 
 
-export const reducer = (state=initialState, action) => {
+export default (state=initialState, action) => {
   switch (action.type) {
-      case GET_QUESTIONS_SUCCESS:
-      console.log('action GET_QUESTIONS_SUCCESS')
-        return { ...state, {
-            questions: actions.questions,
+      case actions.GET_QUESTIONS_SUCCESS:
+        console.log('action GET_QUESTIONS_SUCCESS')
+        return { ...state,
+            questions: action.questions,
         }
-      }
-      break;
+        break;
   }
   return state;
 }
+
+
+//  import { reducer } from './reducers/index';

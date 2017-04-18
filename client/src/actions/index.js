@@ -1,17 +1,19 @@
-// const START_QUIZ = "START_QUIZ";
-// const startQuiz = () => {
-//   type: START_QUIZ,
-//
-// }
+import * as Cookies from 'js-cookie';
 
-const SUBMIT_ANSWER = "SUBMIT_ANSWER";
-const submitAnswer = (receiveAnswer) => {
+export const SUBMIT_ANSWER = "SUBMIT_ANSWER";
+export const submitAnswer = (receiveAnswer) => ({
   type: SUBMIT_ANSWER,
-  receiveAnswer: receiveAnswer,
-}
+  receiveAnswer,
+})
 
-const GET_QUESTIONS = 'GET_QUESTIONS';
-const getQuestions = () => {
+export const GET_QUESTIONS_SUCCESS = "GET_QUESTIONS_SUCCESS";
+export const getQuestionsSuccess = (questions) => ({
+  type: GET_QUESTIONS_SUCCESS,
+  questions: questions,
+})
+
+export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const getQuestions = () => {
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/questions', {
@@ -29,11 +31,4 @@ const getQuestions = () => {
 
     );
   }
-
-}
-
-const GET_QUESTIONS_SUCCESS = "GET_QUESTIONS_SUCCESS";
-const getQuestionsSuccess = (questions) => {
-  type: GET_QUESTIONS_SUCCESS,
-  questions: questions,
 }
