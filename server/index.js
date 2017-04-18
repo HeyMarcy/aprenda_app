@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const User = require('./models/user-model');
+const { User, Question } = require('./models/models');
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -24,6 +24,8 @@ const app = express();
 const database = {
 };
 
+
+//------------------------------- AUTH ROUTES --------------------//
 app.use(passport.initialize());
 
 passport.use(
@@ -33,11 +35,6 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        // Job 1: Set up Mongo/Mongoose, create a User model which store the
-        // google id, and the access token
-        // Job 2: Update this callback to either update or create the user
-        // so it contains the correct access token
-
         User
         .find({
           'googleId': profile.id
@@ -77,10 +74,6 @@ passport.use(
 passport.use(
     new BearerStrategy(
         (token, done) => {
-            // Job 3: Update this callback to try to find a user with a
-            // matching access token.  If they exist, let em in, if not,
-            // don't.
-
             User
             .find({
               'accessToken': token
@@ -118,6 +111,9 @@ app.get('/api/auth/logout', (req, res) => {
     res.redirect('/');
 });
 
+//------------------------------- AUTH ROUTES END  --------------------//
+
+
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
@@ -125,9 +121,18 @@ app.get('/api/me',
     })
 );
 
+
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json(['Question 1', 'Question 2'])
+    (req, res) => {
+      Question
+        .find()
+        .then(
+          questions => {
+            res.json(questions.map(q => q.portuguese));
+          }
+        )
+    }
 );
 
 // Serve the built client
@@ -144,6 +149,7 @@ let server;
 
 function runServer(port=3001, databaseUrl=secret.DB_URL) {
     return new Promise((resolve, reject) => {
+        console.log(databaseUrl);
         mongoose.connect(databaseUrl, err => {
           if (err) {
             return reject(err);
@@ -158,7 +164,6 @@ function runServer(port=3001, databaseUrl=secret.DB_URL) {
       });
     });
 }
-
 
 function closeServer() {
   return mongoose.disconnect().then(() => {
