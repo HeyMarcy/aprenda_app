@@ -1,8 +1,8 @@
-const START_QUIZ = "START_QUIZ";
-const startQuiz = () => {
-  type: START_QUIZ,
-
-}
+// const START_QUIZ = "START_QUIZ";
+// const startQuiz = () => {
+//   type: START_QUIZ,
+//
+// }
 
 const SUBMIT_ANSWER = "SUBMIT_ANSWER";
 const submitAnswer = (receiveAnswer) => {
