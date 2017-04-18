@@ -130,6 +130,7 @@ app.get('/api/questions',
         .then(
           questions => {
             res.json(questions.map(q => q.portuguese));
+//           res.json(questions.map(q => q.portuguese));
           }
         )
     }
