@@ -43,16 +43,26 @@ passport.use(
           users => {
           console.log(users)
           if (!users[0]) {
+              const userScore = 0;
+              Question.find((questions) => {
+                const userQuestions = questions.map((question) => ({
+                    id: question.id,
+                    portuguese: question.portuguese,
+                    english: question.english
+                }));
+              });
             User
               .create({
                 googleId: profile.id,
-                accessToken: accessToken
+                accessToken: accessToken,
+                questions: userQuestions,
+                score: userScore
               })
               .then(
                 user => {
                   return cb(null, user);
                 }
-              );
+              )
           } else {
             User
             .findOneAndUpdate({
@@ -122,19 +132,26 @@ app.get('/api/me',
 );
 
 
-app.get('/api/questions',
-    passport.authenticate('bearer', {session: false}),
-    (req, res) => {
-      Question
-        .find()
-        .then(
-          questions => {
-            res.json(questions.map(q => q.portuguese));
-//           res.json(questions.map(q => q.portuguese));
-          }
-        )
-    }
-);
+// app.get('/api/questions',
+//     passport.authenticate('bearer', {session: false}),
+//     (req, res) => {
+//       User
+//         .findOne({ googleId: req.user[0].googleId })
+//         .then(
+//           user => {
+//             res.json(user.questions);
+//           }
+//         )
+//     }
+// );
+//
+// app.put('/api/answer', passport.authenticate('bearer', {session: false}),
+//   (req, res) => {
+//     if(req.body.answer.toLowerCase() === currentQuestion.english.toLowerCase()) {
+//       const findQuestion = {googleId: req.user[0].googleId, question.id: user.questions[0]}
+//     }
+//   }
+// )
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

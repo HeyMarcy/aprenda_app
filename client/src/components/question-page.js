@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as Cookies from 'js-cookie';
-import { getQuestions, checkLogin, logout } from '../actions/index';
+import { getQuestions, checkLogin, logout, submitCorrectAnswer, submitWrongAnswer } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {
@@ -18,18 +18,28 @@ export class QuestionPage extends React.Component {
     onSubmit(e) {
       e.preventDefault();
       let answer= this.refs.answer.value;
-      console.log(answer);
+      let response = this.props.currentQuestion.english;
+
     }
 
     logOut(e){
       this.props.dispatch(logout())
     }
+    // 
+    // submitAnswer(answer, response) {
+    //   if(answer === response) {
+    //     this.props.dispatch(submitCorrectAnswer());
+    //   }
+    //   if(answer === '') console.log('write your answer!');
+    //   if(answer !== response && answer !== '') console.log('try again');
+    // }
+
 
     render() {
-
+      console.log(this.props.currentQuestion.english);
         return (
             <div className="question-list">
-                {this.props.currentQuestion}
+                {this.props.currentQuestion.portuguese}
                 <form onSubmit={this.onSubmit}>
                 <input type="text" ref="answer"/>
                 <button type="submit">submit</button>
@@ -41,7 +51,9 @@ export class QuestionPage extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  currentQuestion: state.currentQuestion
+  currentQuestion: state.currentQuestion,
+  score: state.score,
+  questions: state.questions
 })
 
 export default connect(mapStateToProps)(QuestionPage);

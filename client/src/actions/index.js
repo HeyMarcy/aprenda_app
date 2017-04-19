@@ -1,20 +1,17 @@
 import * as Cookies from 'js-cookie';
 
-export const SUBMIT_ANSWER = "SUBMIT_ANSWER";
-export const submitAnswer = (receiveAnswer) => ({
-  type: SUBMIT_ANSWER,
-  receiveAnswer,
+export const SUBMIT_CORRECT_ANSWER = "SUBMIT_CORRECT_ANSWER";
+export const submitCorrectAnswer = (score, questions) => ({
+  type: SUBMIT_CORRECT_ANSWER,
+  score: score,
+  questions: score,
 })
 
-export const LOGOUT = "LOGOUT";
-export const logout = () => ({
-  type:LOGOUT,
-})
-
-export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
-export const checkLoginSuccess = (currentUser) => ({
-  type:CHECK_LOGIN_SUCCESS,
-  currentUser
+export const SUBMIT_WRONG_ANSWER = "SUBMIT_WRONG_ANSWER";
+export const submitWrongAnswer = (score, questions) => ({
+  type: SUBMIT_WRONG_ANSWER,
+  score: score,
+  questions: score,
 })
 
 export const CHECK_LOGIN = "CHECK_LOGIN";
@@ -45,10 +42,10 @@ export const checkLogin = () => {
   }
 };
 
-export const GET_QUESTIONS_SUCCESS = "GET_QUESTIONS_SUCCESS";
-export const getQuestionsSuccess = (questions) => ({
-  type: GET_QUESTIONS_SUCCESS,
-  questions: questions,
+export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
+export const checkLoginSuccess = (currentUser) => ({
+  type:CHECK_LOGIN_SUCCESS,
+  currentUser
 })
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
@@ -71,3 +68,14 @@ export const getQuestions = () => {
     );
   }
 }
+
+export const GET_QUESTIONS_SUCCESS = "GET_QUESTIONS_SUCCESS";
+export const getQuestionsSuccess = (questions) => ({
+  type: GET_QUESTIONS_SUCCESS,
+  questions: questions,
+})
+
+export const LOGOUT = "LOGOUT";
+export const logout = () => ({
+  type:LOGOUT,
+})
