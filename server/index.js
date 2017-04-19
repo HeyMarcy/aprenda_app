@@ -44,25 +44,26 @@ passport.use(
           console.log(users)
           if (!users[0]) {
               const userScore = 0;
-              Question.find((questions) => {
+              Question.find().then((questions) => {
+                console.log('questions', questions);
                 const userQuestions = questions.map((question) => ({
                     id: question.id,
                     portuguese: question.portuguese,
                     english: question.english
                 }));
-              });
-            User
-              .create({
-                googleId: profile.id,
-                accessToken: accessToken,
-                questions: userQuestions,
-                score: userScore
+                User
+                  .create({
+                    googleId: profile.id,
+                    accessToken: accessToken,
+                    questions: userQuestions,
+                    score: userScore
+                  })
+                  .then(
+                    user => {
+                      return cb(null, user);
+                    }
+                  )
               })
-              .then(
-                user => {
-                  return cb(null, user);
-                }
-              )
           } else {
             User
             .findOneAndUpdate({
