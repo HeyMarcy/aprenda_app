@@ -25,6 +25,8 @@ export class QuestionPage extends React.Component {
       browserHistory.replace('/login');
     }
 
+    
+
     render() {
 
         return (
