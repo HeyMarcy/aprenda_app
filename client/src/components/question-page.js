@@ -3,12 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as Cookies from 'js-cookie';
-import { getQuestions, checkLogin } from '../actions/index';
+import { getQuestions, checkLogin, logout } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {
         super(props);
         this.onSubmit=this.onSubmit.bind(this);
+        this.logOut=this.logOut.bind(this);
     }
 
     componentDidMount() {
@@ -20,12 +21,9 @@ export class QuestionPage extends React.Component {
       console.log(answer);
     }
 
-    logout(e) {
-      Cookies.remove('accessToken');
-      browserHistory.replace('/login');
+    logOut(e){
+      this.props.dispatch(logout())
     }
-
-    
 
     render() {
 
@@ -36,7 +34,7 @@ export class QuestionPage extends React.Component {
                 <input type="text" ref="answer"/>
                 <button type="submit">submit</button>
                 </form>
-                <button type="submit" onClick ={this.logout}>Logout</button>
+                <button onClick={this.logOut}>Logout</button>
             </div>
         );
     }

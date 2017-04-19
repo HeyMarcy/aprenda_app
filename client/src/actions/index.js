@@ -6,6 +6,11 @@ export const submitAnswer = (receiveAnswer) => ({
   receiveAnswer,
 })
 
+export const LOGOUT = "LOGOUT";
+export const logout = () => ({
+  type:LOGOUT,
+})
+
 export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
 export const checkLoginSuccess = (currentUser) => ({
   type:CHECK_LOGIN_SUCCESS,

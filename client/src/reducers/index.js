@@ -20,6 +20,8 @@ export default (state=initialState, action) => {
           return { ...state,
               currentUser: action.currentUser,
           }
+        case actions.LOGOUT:
+          return {...state, currentUser: null}
   }
   return state;
 }
