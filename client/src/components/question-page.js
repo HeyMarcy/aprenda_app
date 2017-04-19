@@ -7,72 +7,34 @@ import { getQuestions } from '../actions/index';
 export class QuestionPage extends React.Component {
     constructor(props) {
         super(props);
+        this.onSubmit=this.onSubmit.bind(this);
     }
 
     componentDidMount() {
       this.props.dispatch(getQuestions())
     }
+    onSubmit(e) {
+      e.preventDefault();
+      let answer= this.refs.answer.value;
+      console.log(answer);
+    }
 
     render() {
-        const questions = this.props.questions.map((question, index) =>
-            <li key={index}>{question}</li>
-        );
 
         return (
-            <ul className="question-list">
-                {questions}
-            </ul>
+            <div className="question-list">
+                {this.props.currentQuestion}
+                <form onSubmit={this.onSubmit}>
+                <input type="text" ref="answer"/>
+                <button type="submit">submit</button>
+                </form>
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state, props) => ({
-  questions: state.questions
+  currentQuestion: state.currentQuestion
 })
 
 export default connect(mapStateToProps)(QuestionPage);
-
-
-
-
-// import React from 'react';
-// import * as Cookies from 'js-cookie';
-//
-// export default class QuestionPage extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             questions: []
-//         };
-//     }
-//
-//     componentDidMount() {
-//         const accessToken = Cookies.get('accessToken');
-//         fetch('/api/questions', {
-//                 headers: {
-//                     'Authorization': `Bearer ${accessToken}`
-//                 }
-//             }).then(res => {
-//             if (!res.ok) {
-//                 throw new Error(res.statusText);
-//             }
-//             return res.json();
-//         }).then(questions =>
-//             this.setState({
-//                 questions
-//             })
-//         );
-//     }
-//
-//     render() {
-//         const questions = this.state.questions.map((question, index) =>
-//             <li key={index}>{question}</li>
-//         );
-//
-//         return (
-//             <ul className="question-list">
-//                 {questions}
-//             </ul>
-//         );
-//     }
-// }

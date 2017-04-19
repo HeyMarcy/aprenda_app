@@ -4,7 +4,7 @@ const initialState = {
   questions: [],
   currentQuestion: null,
   score: null,
-  user: null,
+  currentUser: null,
 };
 
 
@@ -14,8 +14,12 @@ export default (state=initialState, action) => {
         console.log('action GET_QUESTIONS_SUCCESS')
         return { ...state,
             questions: action.questions,
+            currentQuestion: action.questions[0]
         }
-        break;
+        case actions.CHECK_LOGIN_SUCCESS:
+          return { ...state,
+              currentUser: action.currentUser,
+          }
   }
   return state;
 }
