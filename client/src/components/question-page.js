@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as Cookies from 'js-cookie';
-import { getQuestions } from '../actions/index';
+import { getQuestions, checkLogin } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {
@@ -19,6 +20,11 @@ export class QuestionPage extends React.Component {
       console.log(answer);
     }
 
+    logout(e) {
+      Cookies.remove('accessToken');
+      browserHistory.replace('/login');
+    }
+
     render() {
 
         return (
@@ -28,6 +34,7 @@ export class QuestionPage extends React.Component {
                 <input type="text" ref="answer"/>
                 <button type="submit">submit</button>
                 </form>
+                <button type="submit" onClick ={this.logout}>Logout</button>
             </div>
         );
     }
