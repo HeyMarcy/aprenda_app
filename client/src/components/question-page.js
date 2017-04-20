@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as Cookies from 'js-cookie';
-import { getQuestions, checkLogin, logout, submitCorrectAnswer, submitWrongAnswer, checkAnswer } from '../actions/index';
+import { getQuestions, checkLogin, logout, submitCorrectAnswer, checkAnswerSuccess, submitWrongAnswer, checkAnswer } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {
@@ -19,7 +19,8 @@ export class QuestionPage extends React.Component {
       e.preventDefault();
       let userInput= this.refs.answer.value;
       let question = this.props.currentQuestion._id;
-      if(userInput === this.props.currentQuestion.answer){
+      console.log(userInput, this.props.currentQuestion.english);
+      if(userInput === this.props.currentQuestion.english){
         this.props.dispatch(checkAnswer(1, question))
       } else {
         this.props.dispatch(checkAnswer(-1, question))

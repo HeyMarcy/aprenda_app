@@ -70,7 +70,7 @@ passport.use(
             }, {new: true})
             .then(
               user => {
-                console.log('afterupdate', user)
+                // console.log('afterupdate', user)
                 return cb(null, user);
               }
             )
@@ -147,13 +147,13 @@ passport.authenticate('bearer', {session: false}),
     (req, res) => {
       User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.questions})
       console.log("req.body ", req.body);
-      res.json("Hello, world");
+      //  res.json("Hello, world");
     }
 );
 
 
 
-//  "questionSet._id": mongoose.Types.ObjectId(questionId)
+//  "questionSet._id": mongoose.Types.ObjectId(questionId) /// from Aaron as suggestion
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

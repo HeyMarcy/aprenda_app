@@ -38,7 +38,6 @@ export const checkLogin = () => {
             dispatch(checkLoginSuccess(currentUser))
         );
     }
-
   }
 };
 
@@ -80,12 +79,13 @@ export const checkAnswer = (userInput, question ) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json", // added because empty object was recieved.
               'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
-            body: JSON.stringify({userInput, question}),
+            body: JSON.stringify({userInput, question}) // changed from 'data' to 'body'
         }).then(res => {
+
         if (!res.ok) {
             throw new Error(res.statusText);
         }
@@ -101,7 +101,6 @@ export const CHECK_ANSWER_SUCCESS = "CHECK_ANSWER_SUCCESS";
 export const checkAnswerSuccess = (result) => ({
   type: CHECK_ANSWER_SUCCESS,
   result: result
-
 })
 
 
