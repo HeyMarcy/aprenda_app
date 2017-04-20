@@ -1,19 +1,5 @@
 import * as Cookies from 'js-cookie';
 
-// export const SUBMIT_CORRECT_ANSWER = "SUBMIT_CORRECT_ANSWER";
-// export const submitCorrectAnswer = (score, questions) => ({
-//   type: SUBMIT_CORRECT_ANSWER,
-//   score: score,
-//   questions: score,
-// })
-//
-// export const SUBMIT_WRONG_ANSWER = "SUBMIT_WRONG_ANSWER";
-// export const submitWrongAnswer = (score, questions) => ({
-//   type: SUBMIT_WRONG_ANSWER,
-//   score: score,
-//   questions: score,
-// })
-
 export const CHECK_LOGIN = "CHECK_LOGIN";
 export const checkLogin = () => {
   return (dispatch) => {

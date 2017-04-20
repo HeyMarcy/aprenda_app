@@ -17,10 +17,6 @@ export default (state=initialState, action) => {
         return { ...state, currentUser: action.currentUser}
       case actions.LOGOUT:
         return {...state, currentUser: null}
-      case actions.SUBMIT_CORRECT_ANSWER:
-        return{...state, questions: action.questions, score: action.score}
-      case actions.SUBMIT_WRONG_ANSWER:
-        return{...state, questions: action.questions, score: action.score}
       case actions.CHECK_ANSWER_SUCCESS:
         console.log("questionScore", action.questionScore)
         return {...state, questionScore: action.questionScore}
