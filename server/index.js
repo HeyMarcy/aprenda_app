@@ -4,10 +4,10 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
 
-const { User, Question } = require('./models/models');
+const { User, Question } = require('./models');
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -16,18 +16,17 @@ let secret = {
 }
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('./secret');
+  secret = require('./secret');   //// What is NODE_ENV??
 }
 
 const app = express();
 
-const database = {
-};
+const database = { };  //// don't think this is being used.
 
-
-//------------------------------- AUTH ROUTES --------------------//
 app.use(passport.initialize());
+app.use(bodyParser.json());
 
+//----------------   AUTH ROUTES   --------------------//
 passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
@@ -79,7 +78,6 @@ passport.use(
         });
     }
 ));
-
 
 
 passport.use(
@@ -142,10 +140,14 @@ app.get('/api/questions',
       res.json(questions.slice(0,10));
     }
 );
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/api/answer',
+passport.authenticate('bearer', {session: false}),
     (req, res) => {
-      User.findOneAndUpdate( {google: req.user.googleId, "questions._id": req.body.question} , {$inc: {"questions.$.score": req.body.answer} })
+      User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.questions})
+      console.log("req.body ", req.body);
+      res.json("Hello, world");
     }
 );
 

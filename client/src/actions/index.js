@@ -80,10 +80,11 @@ export const checkAnswer = (userInput, question ) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+              "Content-Type": "application/json",
+              'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
-            data: { userInput, question }
+            body: JSON.stringify({userInput, question}),
         }).then(res => {
         if (!res.ok) {
             throw new Error(res.statusText);
