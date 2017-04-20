@@ -33,7 +33,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   currentUser: state.currentUser,
-  questionScore: state.questionScore
+  questionScore: state.questionScore,
+  submitCount: state.submitCount
 })
 
 export default connect(mapStateToProps)(App)

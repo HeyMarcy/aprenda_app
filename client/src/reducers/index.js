@@ -5,7 +5,8 @@ const initialState = {
   currentQuestion: {},
   score: 0,
   currentUser: null,
-  questionScore: 0
+  questionScore: 0,
+  submitCount: 0
 };
 
 
@@ -18,7 +19,11 @@ export default (state=initialState, action) => {
       case actions.LOGOUT:
         return {...state, currentUser: null}
       case actions.CHECK_ANSWER_SUCCESS:
-        return {...state, questionScore: action.questionScore, score: action.score}
+        let score = state.score;
+        if(action.questionScore === 1) {
+          score++;
+        }
+        return {...state, questionScore: action.questionScore, score: score, submitCount: ++state.submitCount}
       case actions.RELOAD_QUESTION:
         return {...state, questionScore: action.questionScore}
   }
