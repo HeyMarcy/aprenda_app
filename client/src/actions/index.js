@@ -1,5 +1,11 @@
 import * as Cookies from 'js-cookie';
 
+export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
+export const checkLoginSuccess = (currentUser) => ({
+  type:CHECK_LOGIN_SUCCESS,
+  currentUser
+})
+
 export const CHECK_LOGIN = "CHECK_LOGIN";
 export const checkLogin = () => {
   return (dispatch) => {
@@ -12,8 +18,6 @@ export const checkLogin = () => {
         }).then(res => {
             if (!res.ok) {
                 if (res.status === 401) {
-                  // Unauthorized, clear the cookie and go to
-                  // the login page
                   Cookies.remove('accessToken');
                   return;
                 }
@@ -26,12 +30,6 @@ export const checkLogin = () => {
     }
   }
 };
-
-export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
-export const checkLoginSuccess = (currentUser) => ({
-  type:CHECK_LOGIN_SUCCESS,
-  currentUser
-})
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const getQuestions = () => {
@@ -60,7 +58,7 @@ export const getQuestionsSuccess = (questions) => ({
 })
 
 export const CHECK_ANSWER = 'CHECK_ANSWER';
-export const checkAnswer = (questionScore, questionId ) => {  //TODO remove 'question' parameter?
+export const checkAnswer = (questionScore, questionId ) => {
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
@@ -69,7 +67,7 @@ export const checkAnswer = (questionScore, questionId ) => {  //TODO remove 'que
               'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
-            body: JSON.stringify({questionScore, questionId}) //changed from 'data' to 'body'//TODO rm 'question'?
+            body: JSON.stringify({questionScore, questionId})
         }).then(res => {
         if (!res.ok) {
             throw new Error(res.statusText);

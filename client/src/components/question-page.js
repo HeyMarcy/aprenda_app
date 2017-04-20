@@ -1,9 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import * as Cookies from 'js-cookie';
-import { getQuestions, checkLogin, logout, submitCorrectAnswer, checkAnswerSuccess, submitWrongAnswer, checkAnswer } from '../actions/index';
+import { getQuestions, logout, checkAnswer } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {

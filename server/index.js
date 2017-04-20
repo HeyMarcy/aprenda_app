@@ -21,7 +21,6 @@ if(process.env.NODE_ENV != 'production') {
 
 const app = express();
 
-
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
