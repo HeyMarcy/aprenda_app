@@ -18,7 +18,7 @@ export class QuestionPage extends React.Component {
     onSubmit(e) {
       e.preventDefault();
       let userInput= this.refs.answer.value;
-      let question = this.props.currentQuestion._id;
+      let question = this.props.currentQuestion.id;
       let questionScore;
       console.log(userInput, this.props.currentQuestion.english);
       if(userInput === this.props.currentQuestion.english){
@@ -31,15 +31,6 @@ export class QuestionPage extends React.Component {
     logOut(e){
       this.props.dispatch(logout())
     }
-    //
-    // submitAnswer(answer, response) {
-    //   if(answer === response) {
-    //     this.props.dispatch(submitCorrectAnswer());
-    //   }
-    //   if(answer === '') console.log('write your answer!');
-    //   if(answer !== response && answer !== '') console.log('try again');
-    // }
-
 
     render() {
         if(this.props.currentQuestion){

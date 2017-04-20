@@ -22,7 +22,10 @@ export default (state=initialState, action) => {
       case actions.SUBMIT_WRONG_ANSWER:
         return{...state, questions: action.questions, score: action.score}
       case actions.CHECK_ANSWER_SUCCESS:
-        console.log(action.questionScore)
+        console.log("questionScore", action.questionScore)
+        return {...state, questionScore: action.questionScore}
+      case actions.RELOAD_QUESTION:
+        console.log("reload - questionScore", action.questionScore)
         return {...state, questionScore: action.questionScore}
   }
   return state;

@@ -46,6 +46,7 @@ passport.use(
               Question.find().then((questions) => {
                 console.log('questions', questions);
                 const userQuestions = questions.map((question) => ({
+                    id:question._id,
                     questionScore: 0,
                     portuguese: question.portuguese,
                     english: question.english
@@ -147,12 +148,15 @@ passport.authenticate('bearer', {session: false}),
     (req, res) => {
       User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.questions})
       .then(user => {
-        res.sendStatus(200)
+        let questions = req.user.questions.sort((a,b)=>{
+          return a.questionScore - b.questionScore;
+        })
+        res.json(questions.slice(0,10));
     })
     .catch(err => {
-        res.status(500).send(err)
+        console.error(err);
+        res.sendStatus(500);
     })
-
     console.log("req.body ", req.body);
       //  res.json("Hello, world");
     }
@@ -160,7 +164,6 @@ passport.authenticate('bearer', {session: false}),
 
 
 
-//  "questionSet._id": mongoose.Types.ObjectId(questionId) /// from Aaron as suggestion
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
