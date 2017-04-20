@@ -47,7 +47,7 @@ passport.use(
               Question.find().then((questions) => {
                 console.log('questions', questions);
                 const userQuestions = questions.map((question) => ({
-                    id: question.id,
+                    score: 0,
                     portuguese: question.portuguese,
                     english: question.english
                 }));
@@ -133,26 +133,25 @@ app.get('/api/me',
 );
 
 
-// app.get('/api/questions',
-//     passport.authenticate('bearer', {session: false}),
-//     (req, res) => {
-//       User
-//         .findOne({ googleId: req.user[0].googleId })
-//         .then(
-//           user => {
-//             res.json(user.questions);
-//           }
-//         )
-//     }
-// );
-//
-// app.put('/api/answer', passport.authenticate('bearer', {session: false}),
-//   (req, res) => {
-//     if(req.body.answer.toLowerCase() === currentQuestion.english.toLowerCase()) {
-//       const findQuestion = {googleId: req.user[0].googleId, question.id: user.questions[0]}
-//     }
-//   }
-// )
+app.get('/api/questions',
+    passport.authenticate('bearer', {session: false}),
+    (req, res) => {
+      let questions = req.user.questions.sort((a,b)=>{
+        return a.score - b.score;
+      })
+      res.json(questions.slice(0,10));
+    }
+);
+
+app.post('/api/answer',
+    (req, res) => {
+      User.findOneAndUpdate( {google: req.user.googleId, "questions._id": req.body.question} , {$inc: {"questions.$.score": req.body.answer} })
+    }
+);
+
+
+
+//  "questionSet._id": mongoose.Types.ObjectId(questionId)
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

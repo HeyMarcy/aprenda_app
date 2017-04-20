@@ -64,7 +64,6 @@ export const getQuestions = () => {
     }).then(questions => {
       dispatch(getQuestionsSuccess(questions));
     }
-
     );
   }
 }
@@ -74,6 +73,36 @@ export const getQuestionsSuccess = (questions) => ({
   type: GET_QUESTIONS_SUCCESS,
   questions: questions,
 })
+
+export const CHECK_ANSWER = 'CHECK_ANSWER';
+export const checkAnswer = (userInput, question ) => {
+  return (dispatch) => {
+    const accessToken = Cookies.get('accessToken');
+    fetch('/api/answer', {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            },
+            method:'POST',
+            data: { userInput, question }
+        }).then(res => {
+        if (!res.ok) {
+            throw new Error(res.statusText);
+        }
+        return res.json();
+    }).then(result => {
+      dispatch(checkAnswerSuccess(result));
+    }
+    );
+  }
+}
+
+export const CHECK_ANSWER_SUCCESS = "CHECK_ANSWER_SUCCESS";
+export const checkAnswerSuccess = (result) => ({
+  type: CHECK_ANSWER_SUCCESS,
+  result: result
+
+})
+
 
 export const LOGOUT = "LOGOUT";
 export const logout = () => ({

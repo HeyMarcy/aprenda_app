@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as Cookies from 'js-cookie';
-import { getQuestions, checkLogin, logout, submitCorrectAnswer, submitWrongAnswer } from '../actions/index';
+import { getQuestions, checkLogin, logout, submitCorrectAnswer, submitWrongAnswer, checkAnswer } from '../actions/index';
 
 export class QuestionPage extends React.Component {
     constructor(props) {
@@ -17,15 +17,19 @@ export class QuestionPage extends React.Component {
     }
     onSubmit(e) {
       e.preventDefault();
-      let answer= this.refs.answer.value;
-      let response = this.props.currentQuestion.english;
-
+      let userInput= this.refs.answer.value;
+      let question = this.props.currentQuestion._id;
+      if(userInput === this.props.currentQuestion.answer){
+        this.props.dispatch(checkAnswer(1, question))
+      } else {
+        this.props.dispatch(checkAnswer(-1, question))
+      }
     }
 
     logOut(e){
       this.props.dispatch(logout())
     }
-    // 
+    //
     // submitAnswer(answer, response) {
     //   if(answer === response) {
     //     this.props.dispatch(submitCorrectAnswer());
@@ -36,17 +40,22 @@ export class QuestionPage extends React.Component {
 
 
     render() {
-      console.log(this.props.currentQuestion.english);
-        return (
-            <div className="question-list">
-                {this.props.currentQuestion.portuguese}
-                <form onSubmit={this.onSubmit}>
-                <input type="text" ref="answer"/>
-                <button type="submit">submit</button>
-                </form>
-                <button onClick={this.logOut}>Logout</button>
-            </div>
-        );
+        if(this.props.currentQuestion){
+          return (
+              <div className="question-list">
+                  {this.props.currentQuestion.portuguese}
+                  <form onSubmit={this.onSubmit}>
+                  <input type="text" ref="answer"/>
+                  <button type="submit">submit</button>
+                  </form>
+                  <button onClick={this.logOut}>Logout</button>
+              </div>
+          )
+        } else {
+          return (
+            <div> No CurrentQuestion </div>
+          )
+        };
     }
 }
 
