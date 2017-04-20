@@ -85,9 +85,9 @@ export const checkAnswer = (questionScore, question ) => {  //TODO remove 'quest
             method:'POST',
             body: JSON.stringify({questionScore, question}) //changed from 'data' to 'body'//TODO rm 'question'?
         }).then(res => {
-        // if (!res.ok) {
-        //     throw new Error(res.statusText);          //TODO replace error? Removed for now
-        // }
+        if (!res.ok) {
+            throw new Error(res.statusText);
+        }
         return res.json();
     }).then(result => {
       console.log("dispatch success")
