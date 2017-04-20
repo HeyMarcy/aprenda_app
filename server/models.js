@@ -8,11 +8,9 @@ const questionSchema = mongoose.Schema({
 const userSchema = mongoose.Schema({
   googleId: {type: String, required: true},
   accessToken: {type: String, required: true},
-  questions: [questionSchema], 
+  questions: [questionSchema],
   score: {type: Number}
 });
-
-
 
 const User = mongoose.model('User', userSchema);
 const Question = mongoose.model('Question', questionSchema);

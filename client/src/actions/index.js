@@ -58,7 +58,7 @@ export const getQuestionsSuccess = (questions) => ({
 })
 
 export const CHECK_ANSWER = 'CHECK_ANSWER';
-export const checkAnswer = (questionScore, questionId ) => {
+export const checkAnswer = (questionScore, questionId, score ) => {
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
@@ -75,16 +75,17 @@ export const checkAnswer = (questionScore, questionId ) => {
         return res.json();
     }).then(result => {
       console.log("dispatch success")
-      dispatch(checkAnswerSuccess(questionScore));
+      dispatch(checkAnswerSuccess(questionScore, score));
     }
     );
   }
 }
 
 export const CHECK_ANSWER_SUCCESS = "CHECK_ANSWER_SUCCESS";
-export const checkAnswerSuccess = (questionScore) => ({
+export const checkAnswerSuccess = (questionScore, score) => ({
   type: CHECK_ANSWER_SUCCESS,
-  questionScore
+  questionScore,
+  score
 })
 
 export const RELOAD_QUESTION = "RELOAD_QUESTION";

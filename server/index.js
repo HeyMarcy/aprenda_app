@@ -25,6 +25,7 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 
 //----------------   AUTH ROUTES   --------------------//
+
 passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
@@ -77,7 +78,6 @@ passport.use(
     }
 ));
 
-
 passport.use(
     new BearerStrategy(
         (token, done) => {
@@ -120,14 +120,12 @@ app.get('/api/auth/logout', (req, res) => {
 
 //------------------------------- AUTH ROUTES END  --------------------//
 
-
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
         googleId: req.user.googleId
     })
 );
-
 
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
@@ -163,8 +161,6 @@ passport.authenticate('bearer', {session: false}),
     console.log("req.body ", req.body);
     }
 );
-
-
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 

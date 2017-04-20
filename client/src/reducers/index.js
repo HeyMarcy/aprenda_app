@@ -18,10 +18,8 @@ export default (state=initialState, action) => {
       case actions.LOGOUT:
         return {...state, currentUser: null}
       case actions.CHECK_ANSWER_SUCCESS:
-        console.log("questionScore", action.questionScore)
-        return {...state, questionScore: action.questionScore}
+        return {...state, questionScore: action.questionScore, score: action.score}
       case actions.RELOAD_QUESTION:
-        console.log("reload - questionScore", action.questionScore)
         return {...state, questionScore: action.questionScore}
   }
   return state;

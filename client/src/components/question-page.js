@@ -18,11 +18,13 @@ export class QuestionPage extends React.Component {
       let userInput= this.refs.answer.value;
       let questionId = this.props.currentQuestion._id;
       let questionScore;
+      let newScore = this.props.score;
       console.log('question id?', questionId);
       if(userInput === this.props.currentQuestion.english){
-        this.props.dispatch(checkAnswer(1, questionId))
+        newScore++;
+        this.props.dispatch(checkAnswer(1, questionId, newScore))
       } else {
-        this.props.dispatch(checkAnswer(-1, questionId))
+        this.props.dispatch(checkAnswer(-1, questionId, newScore))
       }
     }
 
@@ -31,6 +33,7 @@ export class QuestionPage extends React.Component {
     }
 
     render() {
+        console.log('Score', this.props.score)
         if(this.props.currentQuestion){
           return (
               <div className="question-list">
