@@ -20,13 +20,13 @@ class App extends React.Component {
         if (!this.props.currentUser) {
             return <LoginPage />;
         }
-        if (this.props.questionScore == 1){
+        if (this.props.questionScore === 1){
           return<SuccessPage />
         }
-        if (this.props.questionScore == -1){
+        if (this.props.questionScore === -1){
           return<ErrorPage />
         }
-        if (this.props.questionScore == 0) {
+        if (this.props.questionScore === 0) {
           return <QuestionPage />;
         }
     }

@@ -21,7 +21,6 @@ if(process.env.NODE_ENV != 'production') {
 
 const app = express();
 
-const database = { };  //// don't think this is being used.
 
 app.use(passport.initialize());
 app.use(bodyParser.json());
@@ -71,7 +70,6 @@ passport.use(
             }, {new: true})
             .then(
               user => {
-                // console.log('afterupdate', user)
                 return cb(null, user);
               }
             )
@@ -163,14 +161,11 @@ passport.authenticate('bearer', {session: false}),
         res.sendStatus(500);
     })
     console.log("req.body ", req.body);
-      //  res.json("Hello, world");
     }
 );
 
 
 
-
-// Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // Unhandled requests which aren't for the API should serve index.html so

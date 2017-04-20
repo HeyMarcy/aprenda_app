@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import * as Cookies from 'js-cookie';
-
+import {Router, Route, browserHistory} from 'react-router';
 import LoginPage from './components/login-page';
 import QuestionPage from './components/question-page';
 import App from './components/app';
