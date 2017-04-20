@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
 const questionSchema = mongoose.Schema({
   portuguese: {type: String, required: true},
   english: {type: String, required: true},
+  questionScore: {type: Number}
 });
 
 

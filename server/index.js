@@ -46,7 +46,7 @@ passport.use(
               Question.find().then((questions) => {
                 console.log('questions', questions);
                 const userQuestions = questions.map((question) => ({
-                    score: 0,
+                    questionScore: 0,
                     portuguese: question.portuguese,
                     english: question.english
                 }));
@@ -135,7 +135,7 @@ app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
       let questions = req.user.questions.sort((a,b)=>{
-        return a.score - b.score;
+        return a.questionScore - b.questionScore;
       })
       res.json(questions.slice(0,10));
     }
@@ -146,7 +146,14 @@ app.post('/api/answer',
 passport.authenticate('bearer', {session: false}),
     (req, res) => {
       User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.questions})
-      console.log("req.body ", req.body);
+      .then(user => {
+        res.sendStatus(200)
+    })
+    .catch(err => {
+        res.status(500).send(err)
+    })
+
+    console.log("req.body ", req.body);
       //  res.json("Hello, world");
     }
 );

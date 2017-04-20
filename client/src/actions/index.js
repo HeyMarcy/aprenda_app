@@ -74,7 +74,7 @@ export const getQuestionsSuccess = (questions) => ({
 })
 
 export const CHECK_ANSWER = 'CHECK_ANSWER';
-export const checkAnswer = (userInput, question ) => {
+export const checkAnswer = (questionScore, question ) => {  //TODO remove 'question' parameter
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
@@ -83,24 +83,24 @@ export const checkAnswer = (userInput, question ) => {
               'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
-            body: JSON.stringify({userInput, question}) // changed from 'data' to 'body'
+            body: JSON.stringify({questionScore, question}) // changed from 'data' to 'body'
         }).then(res => {
-
-        if (!res.ok) {
-            throw new Error(res.statusText);
-        }
+        // if (!res.ok) {
+        //     throw new Error(res.statusText);  //TODO replace error? Removed for now
+        // }
         return res.json();
     }).then(result => {
-      dispatch(checkAnswerSuccess(result));
+      console.log("dispatch success")
+      dispatch(checkAnswerSuccess(questionScore));
     }
     );
   }
 }
 
 export const CHECK_ANSWER_SUCCESS = "CHECK_ANSWER_SUCCESS";
-export const checkAnswerSuccess = (result) => ({
+export const checkAnswerSuccess = (questionScore) => ({
   type: CHECK_ANSWER_SUCCESS,
-  result: result
+  questionScore
 })
 
 

@@ -19,6 +19,7 @@ export class QuestionPage extends React.Component {
       e.preventDefault();
       let userInput= this.refs.answer.value;
       let question = this.props.currentQuestion._id;
+      let questionScore;
       console.log(userInput, this.props.currentQuestion.english);
       if(userInput === this.props.currentQuestion.english){
         this.props.dispatch(checkAnswer(1, question))
@@ -63,7 +64,8 @@ export class QuestionPage extends React.Component {
 const mapStateToProps = (state, props) => ({
   currentQuestion: state.currentQuestion,
   score: state.score,
-  questions: state.questions
+  questions: state.questions,
+  questionScore: state.questionScore
 })
 
 export default connect(mapStateToProps)(QuestionPage);

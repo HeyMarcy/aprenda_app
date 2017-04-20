@@ -5,7 +5,7 @@ const initialState = {
   currentQuestion: {},
   score: 0,
   currentUser: null,
-  result: 0
+  questionScore: 0
 };
 
 
@@ -21,9 +21,9 @@ export default (state=initialState, action) => {
         return{...state, questions: action.questions, score: action.score}
       case actions.SUBMIT_WRONG_ANSWER:
         return{...state, questions: action.questions, score: action.score}
-      // case actions.CHECK_ANSWER_SUCCESS:
-      //   console.log("action.result", action.result)
-      //   return {...state, result: action.result}
+      case actions.CHECK_ANSWER_SUCCESS:
+        console.log(action.questionScore)
+        return {...state, questionScore: action.questionScore}
   }
   return state;
 }
