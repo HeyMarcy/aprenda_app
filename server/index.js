@@ -45,7 +45,7 @@ passport.use(
 
                 const userQuestions = questions.map((question) => ({
                     id:question._id,
-                    questionScore: 0,
+                    score: 0,
                     portuguese: question.portuguese,
                     english: question.english
                 }));
@@ -133,8 +133,9 @@ app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
       let questions = req.user.questions.sort((a,b)=>{
-        return a.questionScore - b.questionScore;
+        return a.score - b.score;
       })
+      console.log('======>', questions);
       res.json(questions.slice(0,10));
     }
 );
@@ -151,7 +152,7 @@ passport.authenticate('bearer', {session: false}),
       .then(user => {
         console.log("user in answer", user)
         let questions = req.user.questions.sort((a,b)=>{
-          return a.questionScore - b.questionScore;
+          return a.score - b.score;
         })
         res.json(questions.slice(0,10));
     })
