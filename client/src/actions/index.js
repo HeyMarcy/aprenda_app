@@ -74,7 +74,7 @@ export const getQuestionsSuccess = (questions) => ({
 })
 
 export const CHECK_ANSWER = 'CHECK_ANSWER';
-export const checkAnswer = (questionScore, question ) => {  //TODO remove 'question' parameter?
+export const checkAnswer = (questionScore, questionId ) => {  //TODO remove 'question' parameter?
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
@@ -83,7 +83,7 @@ export const checkAnswer = (questionScore, question ) => {  //TODO remove 'quest
               'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
-            body: JSON.stringify({questionScore, question}) //changed from 'data' to 'body'//TODO rm 'question'?
+            body: JSON.stringify({questionScore, questionId}) //changed from 'data' to 'body'//TODO rm 'question'?
         }).then(res => {
         if (!res.ok) {
             throw new Error(res.statusText);

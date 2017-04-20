@@ -18,13 +18,13 @@ export class QuestionPage extends React.Component {
     onSubmit(e) {
       e.preventDefault();
       let userInput= this.refs.answer.value;
-      let question = this.props.currentQuestion.id;
+      let questionId = this.props.currentQuestion._id;
       let questionScore;
-      console.log(userInput, this.props.currentQuestion.english);
+      console.log('question id?', questionId);
       if(userInput === this.props.currentQuestion.english){
-        this.props.dispatch(checkAnswer(1, question))
+        this.props.dispatch(checkAnswer(1, questionId))
       } else {
-        this.props.dispatch(checkAnswer(-1, question))
+        this.props.dispatch(checkAnswer(-1, questionId))
       }
     }
 

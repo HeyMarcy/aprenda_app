@@ -44,7 +44,7 @@ passport.use(
           if (!users[0]) {
               const userScore = 0;
               Question.find().then((questions) => {
-                console.log('questions', questions);
+
                 const userQuestions = questions.map((question) => ({
                     id:question._id,
                     questionScore: 0,
@@ -146,11 +146,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/api/answer',
 passport.authenticate('bearer', {session: false}),
     (req, res) => {
-      User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.question},
-      {$inc: {'questions.$.questionScore': req.body.questionScore}},
+      console.log('question id', req.body.questionId)
+      User.findOneAndUpdate(
+        {googleId: req.user.googleId , "questions._id": req.body.questionId},
+      {$inc: {'questions.$.score': req.body.questionScore}},
       {new: true})
       .then(user => {
-        console.log(user)
+        console.log("user in answer", user)
         let questions = req.user.questions.sort((a,b)=>{
           return a.questionScore - b.questionScore;
         })
