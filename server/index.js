@@ -146,8 +146,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/api/answer',
 passport.authenticate('bearer', {session: false}),
     (req, res) => {
-      User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.questions})
+      User.findOneAndUpdate( {googleId: req.user.googleId, "questions._id": req.body.question},
+      {$inc: {'questions.$.questionScore': req.body.questionScore}},
+      {new: true})
       .then(user => {
+        console.log(user)
         let questions = req.user.questions.sort((a,b)=>{
           return a.questionScore - b.questionScore;
         })
