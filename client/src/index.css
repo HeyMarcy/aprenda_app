@@ -22,9 +22,8 @@ div#root {
   font-weight: 100;
   font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 7rem;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: -.2rem;
-  margin: 10px;
   font-weight: 100;
   text-shadow: 0 0 5px rgba(0,0,0,0.23);
 }
@@ -35,8 +34,20 @@ p {
   line-height: 1.5;
   margin: 20px;
   text-shadow: 0 0 5px rgba(0,0,0,0.2);
-
 }
+h1 {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 3rem;
+  line-height: 1.5;
+  margin: 20px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+span {
+  font-weight: 400;
+  font-style: italic;
+}
+
 #google {
   padding: 5%;
   color: white;
@@ -56,10 +67,10 @@ p {
   padding: 20px 30px;
 }
 
-button,
+
 input#input {
     background: #418585;
-    font-weight: 200;
+    font-weight: 300;
     border-radius: 8px;
     color: #ffffff;
     font-size: 18px;
@@ -71,22 +82,34 @@ input#input {
     margin:10px;
 }
 
+button {
+    background: #418585;
+    font-weight: 200;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: .05rem;
+    padding: 10px 25px 10px 25px;
+    text-decoration: none;
+    border-width: 0;
+    border-style: none;
+    margin:10px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+}
+button:focus {
+  outline:none;
+}
 button:hover {
     background: #245C5C;
     text-decoration: none;
 }
-button:focus {
-  box-shadow: 0 0 5px rgba(0, 255, 255, .5);
-}
-
-button:disabled {
-    background: #999999;
-    text-decoration: none;
-    color: #ccc;
-}
 
 
-  input#input[type=text] {
+input#input[type=text] {
+  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, .3);
   -webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;

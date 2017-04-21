@@ -22,7 +22,7 @@ export class errorPage extends React.Component {
 
       <div >
         <button id="logout" onClick={this.logOut}>Logout</button>
-        <p> Oh, too bad. The correct answer is {this.props.questions[this.props.submitCount -1].english}</p>
+        <p> Oh, too bad. The correct answer is <span> {this.props.questions[this.props.submitCount -1].english}</span> .</p>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>
           </form>

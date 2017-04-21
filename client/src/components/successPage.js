@@ -9,7 +9,7 @@ export class SuccessPage extends React.Component {
       this.onSubmit=this.onSubmit.bind(this);
       this.logOut=this.logOut.bind(this);
   }
-  
+
   onSubmit(e) {
     e.preventDefault();
     let questionScore = 0;
@@ -21,8 +21,8 @@ export class SuccessPage extends React.Component {
   render(){
     return (
       <div >
-        <button onClick={this.logOut}>Logout</button>
-        <p> Nice!</p>
+        <button id="logout" onClick={this.logOut}>Logout</button>
+        <h1>Nice!</h1>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>
           </form>

@@ -37,7 +37,7 @@ export class QuestionPage extends React.Component {
                   </div>
                   <form onSubmit={this.onSubmit}>
                   <input id="input" type="text" ref="answer"/>
-                  <button type="submit">submit</button>
+                  <button id="inputbtn" type="submit">submit</button>
                   </form>
                   <button id="logout" onClick={this.logOut}>logout</button>
               </div>
