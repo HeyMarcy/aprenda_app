@@ -4,16 +4,16 @@
 
 ### Introduction
 
-You are not alone if you studied Spanish in for many years in high school and
-all you remember now is Hola. You might even have studied a lot at the time and
+You are not alone if you studied Spanish for many years in high school and
+all you remember now is Hola. You might have even studied a lot at the time and
 aced all your exams. How did that happen? Where did all the knowledge go?
 
 That's because stuffing your brain with a large amount of information at once is
-not an effective way for long-term knowledge retention. Yet, we all do it when
+not an effective method for long-term knowledge retention. Yet, we all do it when
 we need to study.
 
 Aprenda Portugues is an application designed after the flashcards method of
-studying. Except, we do the sorting for you so you can focus on learning.
+studying, except, we do the sorting for you so you can focus on learning.
 
 ### Spaced Repetition
 
@@ -33,7 +33,7 @@ psychological spacing effect."
  npm install
  npm run dev
 ```
-Next, in your internet browser type localhost:8080 and voilà. You are all set to start
+Next, in your internet browser type localhost:8080 and voilà. You're all set to start.
 
 ### How we built it
  * HTML5
