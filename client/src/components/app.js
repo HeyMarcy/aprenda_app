@@ -21,7 +21,7 @@ class App extends React.Component {
         if (!this.props.currentUser) {
           return <LoginPage />;
         }
-        if (this.props.submitCount === 1) {
+        if (this.props.submitCount === 2) {
           return <FinalPage />
         }
         if (this.props.questionScore === 0) {

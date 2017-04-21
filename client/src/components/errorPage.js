@@ -21,7 +21,7 @@ export class errorPage extends React.Component {
     return (
       <div >
         <button onClick={this.logOut}>Logout</button>
-        <p> Oh, too bad!</p>
+        <p> Oh, too bad. The correct answer is {this.props.currentQuestion.english}</p>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>
           </form>
@@ -32,7 +32,8 @@ export class errorPage extends React.Component {
 
 
 const mapStateToProps = (state, props) => ({
-  questionScore: state.questionScore
+  questionScore: state.questionScore,
+  currentQuestion: state.currentQuestion
 })
 
 export default connect(mapStateToProps)(errorPage);
