@@ -24,7 +24,10 @@ class App extends React.Component {
         if (this.props.questionScore === -1){
           return<ErrorPage />
         }
-        if (this.props.submitCount === 2) {
+        if (this.props.questionScore === 1){
+          return<SuccessPage />
+        }
+        if (this.props.submitCount === 5) {
           return <FinalPage />
         }
         if (this.props.questionScore === 0) {
@@ -32,9 +35,6 @@ class App extends React.Component {
         }
         if (!this.props.currentUser) {
           return <LoginPage />;
-        }
-        if (this.props.questionScore === 1){
-          return<SuccessPage />
         }
     }
 }
