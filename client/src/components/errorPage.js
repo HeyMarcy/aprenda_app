@@ -21,7 +21,7 @@ export class errorPage extends React.Component {
     return (
       <div >
         <button onClick={this.logOut}>Logout</button>
-        <p> Oh, too bad. The correct answer is {this.props.currentQuestion.english}</p>
+        <p> Oh, too bad. The correct answer is {this.props.questions[this.props.submitCount -1].english}</p>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>
           </form>
