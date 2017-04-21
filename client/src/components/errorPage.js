@@ -19,9 +19,10 @@ export class errorPage extends React.Component {
   }
   render(){
     return (
-      <div id="info">
-        <button id="logout" onClick={this.logOut}>logout</button>
-        <p> Oh, too bad. The correct answer is {this.props.currentQuestion.english}</p>
+
+      <div >
+        <button id="logout" onClick={this.logOut}>Logout</button>
+        <p> Oh, too bad. The correct answer is {this.props.questions[this.props.submitCount -1].english}</p>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>
           </form>
@@ -33,7 +34,9 @@ export class errorPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   questionScore: state.questionScore,
-  currentQuestion: state.currentQuestion
+  currentQuestion: state.currentQuestion,
+  questions: state.questions,
+  submitCount: state.submitCount
 })
 
 export default connect(mapStateToProps)(errorPage);
