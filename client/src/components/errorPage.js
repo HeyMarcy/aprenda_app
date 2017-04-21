@@ -33,7 +33,9 @@ export class errorPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   questionScore: state.questionScore,
-  currentQuestion: state.currentQuestion
+  currentQuestion: state.currentQuestion,
+  questions: state.questions,
+  submitCount: state.submitCount
 })
 
 export default connect(mapStateToProps)(errorPage);
