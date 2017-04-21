@@ -28,7 +28,13 @@ div#root {
   font-weight: 100;
   text-shadow: 0 0 5px rgba(0,0,0,0.23);
 }
-#info {
+p {
+  font-weight: 200;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 20px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.2);
 
 }
 #google {
@@ -58,7 +64,7 @@ input#input {
     color: #ffffff;
     font-size: 18px;
     letter-spacing: .05rem;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 25px 10px 25px;
     text-decoration: none;
     border-width: 0;
     border-style: none;
