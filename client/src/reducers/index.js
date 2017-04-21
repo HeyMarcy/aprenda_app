@@ -12,12 +12,13 @@ const initialState = {
 
 export default (state=initialState, action) => {
   switch (action.type) {
+      case actions.PLAY_AGAIN:
+        return {...state, score: 0, questionScore: 0, submitCount: 0}
       case actions.GET_QUESTIONS_SUCCESS:
         return { ...state, questions: action.questions, currentQuestion: action.questions[0]}
       case actions.CHECK_LOGIN_SUCCESS:
         return { ...state, currentUser: action.currentUser}
       case actions.LOGOUT:
-        console.log('LOGOUT')
         return {...state, currentUser: null}
       case actions.CHECK_ANSWER_SUCCESS:
         let score = state.score;

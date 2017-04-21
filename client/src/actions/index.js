@@ -2,7 +2,7 @@ import * as Cookies from 'js-cookie';
 
 export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
 export const checkLoginSuccess = (currentUser) => ({
-  type:CHECK_LOGIN_SUCCESS,
+  type: CHECK_LOGIN_SUCCESS,
   currentUser
 })
 
@@ -30,6 +30,11 @@ export const checkLogin = () => {
     }
   }
 };
+
+export const PLAY_AGAIN = 'PLAY_AGAIN';
+export const playAgain = () => ({
+  type: PLAY_AGAIN
+})
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const getQuestions = () => {
@@ -95,5 +100,5 @@ export const reloadQuestion = (questionScore) => ({
 
 export const LOGOUT = "LOGOUT";
 export const logout = () => ({
-  type:LOGOUT,
+  type: LOGOUT
 })
