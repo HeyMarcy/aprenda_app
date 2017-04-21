@@ -10,9 +10,9 @@ export class QuestionPage extends React.Component {
         this.logOut=this.logOut.bind(this);
     }
 
-    componentDidMount() {
-      this.props.dispatch(getQuestions())
-    }
+    // componentDidMount() {
+    //
+    // }
     onSubmit(e) {
       e.preventDefault();
       let userInput= this.refs.answer.value;

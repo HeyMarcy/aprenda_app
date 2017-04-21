@@ -134,7 +134,7 @@ app.get('/api/questions',
         return a.score - b.score;
       })
       console.log('======>', questions);
-      res.json(questions.slice(0,10));
+      res.json(questions.slice(0,4));
     }
 );
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -142,17 +142,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/api/answer',
 passport.authenticate('bearer', {session: false}),
     (req, res) => {
-      console.log('question id', req.body.questionId)
       User.findOneAndUpdate(
         {googleId: req.user.googleId , "questions._id": req.body.questionId},
       {$inc: {'questions.$.score': req.body.questionScore}},
       {new: true})
       .then(user => {
-        console.log("user in answer", user)
         let questions = req.user.questions.sort((a,b)=>{
           return a.score - b.score;
         })
-        res.json(questions.slice(0,10));
+        res.json(questions.slice(0,4));
     })
     .catch(err => {
         console.error(err);

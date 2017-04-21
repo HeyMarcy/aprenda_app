@@ -23,7 +23,8 @@ export default (state=initialState, action) => {
         if(action.questionScore === 1) {
           score++;
         }
-        return {...state, questionScore: action.questionScore, score: score, submitCount: ++state.submitCount}
+        return {...state, questionScore: action.questionScore, score: score,
+                  submitCount: ++state.submitCount, currentQuestion: state.questions[state.submitCount]}
       case actions.RELOAD_QUESTION:
         return {...state, questionScore: action.questionScore}
   }

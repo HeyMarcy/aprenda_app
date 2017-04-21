@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkLogin } from '../actions/index';
+import * as action from '../actions/index';
 import ErrorPage from './errorPage';
 import SuccessPage from './successPage';
 import QuestionPage from './question-page';
@@ -12,7 +12,8 @@ class App extends React.Component {
     // }
 
     componentDidMount() {
-      this.props.dispatch(checkLogin())
+      this.props.dispatch(action.checkLogin());
+      this.props.dispatch(action.getQuestions());
     }
 
     render() {
