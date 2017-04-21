@@ -23,6 +23,7 @@ const app = express();
 
 app.use(passport.initialize());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 //----------------   AUTH ROUTES   --------------------//
 
@@ -93,13 +94,14 @@ passport.use(
               }
               return done(null, users[0]);
               }
-          )
+            )
         }
     )
 );
 
 app.get('/api/auth/google',
-    passport.authenticate('google', {scope: ['profile']}));
+    passport.authenticate('google', {scope: ['profile']})
+);
 
 app.get('/api/auth/google/callback',
     passport.authenticate('google', {
@@ -137,13 +139,12 @@ app.get('/api/questions',
       res.json(questions.slice(0,10));
     }
 );
-app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/api/answer',
 passport.authenticate('bearer', {session: false}),
     (req, res) => {
       User.findOneAndUpdate(
-        {googleId: req.user.googleId , "questions._id": req.body.questionId},
+        {googleId: req.user.googleId , 'questions._id': req.body.questionId},
       {$inc: {'questions.$.score': req.body.questionScore}},
       {new: true})
       .then(user => {
@@ -156,7 +157,7 @@ passport.authenticate('bearer', {session: false}),
         console.error(err);
         res.sendStatus(500);
     })
-    console.log("req.body ", req.body);
+    console.log('req.body', req.body);
     }
 );
 

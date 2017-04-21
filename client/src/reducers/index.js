@@ -9,7 +9,6 @@ const initialState = {
   submitCount: 0
 };
 
-
 export default (state=initialState, action) => {
   switch (action.type) {
       case actions.PLAY_AGAIN:
@@ -32,6 +31,3 @@ export default (state=initialState, action) => {
   }
   return state;
 }
-
-
-//  import { reducer } from './reducers/index';

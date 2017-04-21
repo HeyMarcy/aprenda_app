@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 
-
 export class SuccessPage extends React.Component {
   constructor(props) {
       super(props);
@@ -15,9 +14,11 @@ export class SuccessPage extends React.Component {
     let questionScore = 0;
     this.props.dispatch(actions.reloadQuestion(questionScore))
   }
+
   logOut(e){
     this.props.dispatch(actions.logout())
   }
+
   render(){
     return (
       <div >
@@ -30,7 +31,6 @@ export class SuccessPage extends React.Component {
     )
   }
 }
-
 
 const mapStateToProps = (state, props) => ({
   questionScore: state.questionScore

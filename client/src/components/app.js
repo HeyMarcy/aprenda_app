@@ -8,16 +8,13 @@ import LoginPage from './login-page';
 import FinalPage from './final-page';
 
 class App extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
 
     componentDidMount() {
       this.props.dispatch(actions.checkLogin());
       this.props.dispatch(actions.getQuestions());
     }
 
-render() {
+    render() {
         if (!this.props.currentUser) {
           return <LoginPage />;
         }

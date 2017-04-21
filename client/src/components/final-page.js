@@ -9,7 +9,6 @@ export class FinalPage extends React.Component {
         this.replay = this.replay.bind(this);
     }
 
-
     logOut(e){
       this.props.dispatch(actions.logout());
     }

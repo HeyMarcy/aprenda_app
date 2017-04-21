@@ -1,12 +1,12 @@
 import * as Cookies from 'js-cookie';
 
-export const CHECK_LOGIN_SUCCESS = "CHECK_LOGIN_SUCCESS";
+export const CHECK_LOGIN_SUCCESS = 'CHECK_LOGIN_SUCCESS';
 export const checkLoginSuccess = (currentUser) => ({
   type: CHECK_LOGIN_SUCCESS,
   currentUser
 })
 
-export const CHECK_LOGIN = "CHECK_LOGIN";
+export const CHECK_LOGIN = 'CHECK_LOGIN';
 export const checkLogin = () => {
   return (dispatch) => {
     const accessToken = Cookies.get('accessToken');
@@ -56,7 +56,7 @@ export const getQuestions = () => {
   }
 }
 
-export const GET_QUESTIONS_SUCCESS = "GET_QUESTIONS_SUCCESS";
+export const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
 export const getQuestionsSuccess = (questions) => ({
   type: GET_QUESTIONS_SUCCESS,
   questions: questions,
@@ -68,7 +68,7 @@ export const checkAnswer = (questionScore, questionId) => {
     const accessToken = Cookies.get('accessToken');
     fetch('/api/answer', {
             headers: {
-              "Content-Type": "application/json", // 'Content-Type' added because empty object was recieved.
+              'Content-Type': 'application/json', //'Content-Type' added because empty object was recieved.
               'Authorization': `Bearer ${accessToken}`
             },
             method:'POST',
@@ -79,26 +79,25 @@ export const checkAnswer = (questionScore, questionId) => {
         }
         return res.json();
     }).then(result => {
-      console.log("dispatch success")
       dispatch(checkAnswerSuccess(questionScore));
     }
     );
   }
 }
 
-export const CHECK_ANSWER_SUCCESS = "CHECK_ANSWER_SUCCESS";
+export const CHECK_ANSWER_SUCCESS = 'CHECK_ANSWER_SUCCESS';
 export const checkAnswerSuccess = (questionScore) => ({
   type: CHECK_ANSWER_SUCCESS,
   questionScore
 })
 
-export const RELOAD_QUESTION = "RELOAD_QUESTION";
+export const RELOAD_QUESTION = 'RELOAD_QUESTION';
 export const reloadQuestion = (questionScore) => ({
   type: RELOAD_QUESTION,
   questionScore
 })
 
-export const LOGOUT = "LOGOUT";
+export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
   type: LOGOUT
 })
