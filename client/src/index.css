@@ -1,5 +1,116 @@
+
+html,
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  font: 100% "Open Sans", Helvetica, sans-serif;
+  width: 80%;
+  margin: 0 auto;
+  padding: 8%;
+  line-height: 1.6;
+  color:white;
+  background-color: #2C6D6D;
+
+}
+div#root {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+
+#question-list {
+  font-weight: 100;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 7rem;
+  line-height: 1;
+  letter-spacing: -.2rem;
+  margin: 10px;
+  font-weight: 100;
+  text-shadow: 0 0 5px rgba(0,0,0,0.23);
+}
+#info {
+
+}
+#google {
+  padding: 5%;
+  color: white;
+}
+#google a {
+  text-decoration: none;
+  color: white;
+}
+#google button {
+  text-decoration: none;
+  color: white;
+  font-weight: 200;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: .05rem;
+  padding: 20px 30px;
+}
+
+button,
+input#input {
+    background: #418585;
+    font-weight: 200;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: .05rem;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border-width: 0;
+    border-style: none;
+    margin:10px;
+}
+
+button:hover {
+    background: #245C5C;
+    text-decoration: none;
+}
+button:focus {
+  box-shadow: 0 0 5px rgba(0, 255, 255, .5);
+}
+
+button:disabled {
+    background: #999999;
+    text-decoration: none;
+    color: #ccc;
+}
+
+
+  input#input[type=text] {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+}
+
+input#input[type=text]:focus {
+  background: #A1CBCB;
+  color:#193939;
+  box-shadow: 0 0 5px rgba(0, 255, 255, .5);
+}
+
+
+button#logout{
+  position: absolute;
+  top: 5%;
+  right:5%;
+  background: #245C5C;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border-width: 0;
+  border-style: none;
+  margin:10px;
+  font-weight: 200;
+}
+button#logout:hover {
+    background: #418585;
+    text-decoration: none;
 }

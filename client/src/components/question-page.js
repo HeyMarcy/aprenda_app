@@ -31,13 +31,15 @@ export class QuestionPage extends React.Component {
     render() {
         if(this.props.currentQuestion){
           return (
-              <div className="question-list">
-                  {this.props.currentQuestion.portuguese}
+              <div>
+                  <div id="question-list">
+                    {this.props.currentQuestion.portuguese}
+                  </div>
                   <form onSubmit={this.onSubmit}>
-                  <input type="text" ref="answer"/>
+                  <input id="input" type="text" ref="answer"/>
                   <button type="submit">submit</button>
                   </form>
-                  <button onClick={this.logOut}>Logout</button>
+                  <button id="logout" onClick={this.logOut}>logout</button>
               </div>
           )
         } else {

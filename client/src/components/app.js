@@ -17,7 +17,7 @@ class App extends React.Component {
       this.props.dispatch(actions.getQuestions());
     }
 
-    render() {
+render() {
         if (!this.props.currentUser) {
           return <LoginPage />;
         }

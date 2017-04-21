@@ -22,11 +22,11 @@ export class FinalPage extends React.Component {
 
     render() {
       return(
-              <div className="final-page">
-                Your final score is: {this.props.score}
+              <div id="info">
+                <p>Your final score is: {this.props.score}</p>
                 <button onClick={this.replay}>Play Again</button>
-                <button onClick={this.logOut}>Logout</button>
-              </div>
+                <button id="logout" onClick={this.logOut}>logout</button>
+                </div>
       )
     }
 }

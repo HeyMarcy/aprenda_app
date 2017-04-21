@@ -19,8 +19,8 @@ export class errorPage extends React.Component {
   }
   render(){
     return (
-      <div >
-        <button onClick={this.logOut}>Logout</button>
+      <div id="info">
+        <button id="logout" onClick={this.logOut}>logout</button>
         <p> Oh, too bad. The correct answer is {this.props.currentQuestion.english}</p>
           <form onSubmit={this.onSubmit}>
           <button type="submit">next question</button>

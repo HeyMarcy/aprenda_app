@@ -18,7 +18,7 @@ const routes = (
 )
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider id="container" store={store}>
       {routes}
   </Provider>,
   document.getElementById('root')
