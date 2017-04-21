@@ -134,7 +134,7 @@ app.get('/api/questions',
         return a.score - b.score;
       })
       console.log('======>', questions);
-      res.json(questions.slice(0,4));
+      res.json(questions.slice(0,10));
     }
 );
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -150,7 +150,7 @@ passport.authenticate('bearer', {session: false}),
         let questions = req.user.questions.sort((a,b)=>{
           return a.score - b.score;
         })
-        res.json(questions.slice(0,4));
+        res.json(questions.slice(0,10));
     })
     .catch(err => {
         console.error(err);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as action from '../actions/index';
+import * as actions from '../actions/index';
 import ErrorPage from './errorPage';
 import SuccessPage from './successPage';
 import QuestionPage from './question-page';
 import LoginPage from './login-page';
+import FinalPage from './final-page';
 
 class App extends React.Component {
     // constructor(props) {
@@ -12,13 +13,19 @@ class App extends React.Component {
     // }
 
     componentDidMount() {
-      this.props.dispatch(action.checkLogin());
-      this.props.dispatch(action.getQuestions());
+      this.props.dispatch(actions.checkLogin());
+      this.props.dispatch(actions.getQuestions());
     }
 
     render() {
         if (!this.props.currentUser) {
-            return <LoginPage />;
+          return <LoginPage />;
+        }
+        if (this.props.submitCount === 5) {
+          return <FinalPage />
+        }
+        if (!this.props.currentUser) {
+          return <LoginPage />;
         }
         if (this.props.questionScore === 1){
           return<SuccessPage />

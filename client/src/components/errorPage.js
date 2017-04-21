@@ -6,8 +6,8 @@ import * as actions from '../actions/index';
 export class errorPage extends React.Component {
   constructor(props) {
       super(props);
-      this.onSubmit=this.onSubmit.bind(this);
-      this.logOut=this.logOut.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.logOut = this.logOut.bind(this);
   }
   onSubmit(e) {
     e.preventDefault();

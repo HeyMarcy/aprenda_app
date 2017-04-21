@@ -17,6 +17,7 @@ export default (state=initialState, action) => {
       case actions.CHECK_LOGIN_SUCCESS:
         return { ...state, currentUser: action.currentUser}
       case actions.LOGOUT:
+        console.log('LOGOUT')
         return {...state, currentUser: null}
       case actions.CHECK_ANSWER_SUCCESS:
         let score = state.score;
