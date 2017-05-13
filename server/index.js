@@ -40,7 +40,6 @@ passport.use(
         })
         .then(
           users => {
-          console.log(users)
           if (!users[0]) {
               const userScore = 0;
               Question.find().then((questions) => {
@@ -87,7 +86,6 @@ passport.use(
             })
             .then(
               users => {
-              console.log(users)
               if (!users[0]) {
                 return done(null, false);
               }
