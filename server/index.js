@@ -16,7 +16,7 @@ let secret = {
 }
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('./secret');   //// What is NODE_ENV??
+  secret = require('./secret');
 }
 
 const app = express();
@@ -44,7 +44,6 @@ passport.use(
           if (!users[0]) {
               const userScore = 0;
               Question.find().then((questions) => {
-
                 const userQuestions = questions.map((question) => ({
                     id:question._id,
                     score: 0,
@@ -151,11 +150,11 @@ passport.authenticate('bearer', {session: false}),
           return a.score - b.score;
         })
         res.json(questions.slice(0,10));
-    })
-    .catch(err => {
-        console.error(err);
-        res.sendStatus(500);
-    })
+      })
+      .catch(err => {
+          console.error(err);
+          res.sendStatus(500);
+      })
     }
 );
 
