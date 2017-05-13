@@ -30,9 +30,6 @@ class App extends React.Component {
         if (this.props.questionScore === 0) {
           return <QuestionPage />;
         }
-        if (!this.props.currentUser) {
-          return <LoginPage />;
-        }
     }
 }
 

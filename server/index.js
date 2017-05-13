@@ -135,7 +135,6 @@ app.get('/api/questions',
       let questions = req.user.questions.sort((a,b)=>{
         return a.score - b.score;
       })
-      console.log('======>', questions);
       res.json(questions.slice(0,10));
     }
 );
@@ -157,7 +156,6 @@ passport.authenticate('bearer', {session: false}),
         console.error(err);
         res.sendStatus(500);
     })
-    console.log('req.body', req.body);
     }
 );
 
