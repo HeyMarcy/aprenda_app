@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise; 
 
 const { User, Question } = require('./models');
 
@@ -162,7 +162,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 // client-side routing using browserHistory can function
 app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
-    res.sendFile(index); 
+    res.sendFile(index);
 });
 
 let server;
