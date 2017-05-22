@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-mongoose.Promise = global.Promise; 
+mongoose.Promise = global.Promise;
 
 const { User, Question } = require('./models');
 
@@ -166,8 +166,9 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 });
 
 let server;
+let port = process.env.PORT || 8000
 
-function runServer(port=3001, databaseUrl=secret.DB_URL) {
+function runServer(port, databaseUrl=secret.DB_URL) {
     return new Promise((resolve, reject) => {
         console.log(databaseUrl);
         mongoose.connect(databaseUrl, err => {
