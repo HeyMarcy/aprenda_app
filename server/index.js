@@ -170,7 +170,7 @@ let server;
 function runServer(port=3001, databaseUrl=secret.DB_URL) {
     return new Promise((resolve, reject) => {
         console.log(databaseUrl);
-        mongoose.connect(databaseUrl, err => {
+        mongoose.connect(process.env.DATABAE_URL || databaseUrl, err => {
           if (err) {
             return reject(err);
           }
