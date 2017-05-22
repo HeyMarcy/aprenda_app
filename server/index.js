@@ -162,7 +162,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 // client-side routing using browserHistory can function
 app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
-    res.sendFile(index);
+    res.sendFile(index); 
 });
 
 let server;
