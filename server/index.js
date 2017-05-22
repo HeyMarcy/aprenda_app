@@ -172,7 +172,8 @@ function runServer(port=3001, databaseUrl=secret.DB_URL) {
         console.log(databaseUrl);
         mongoose.connect(process.env.DATABAE_URL || databaseUrl, err => {
           if (err) {
-            return reject(err);
+            return reject(err)
+            .catch(error => { console.log('caught', error.message)});
           }
 
         server = app.listen(port, () => {
