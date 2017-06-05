@@ -24,7 +24,7 @@ export class FinalPage extends React.Component {
         <div id="info">
           <p>Your final score is: <span>{this.props.score}</span> </p>
           <button onClick={this.replay}>Play Again</button>
-          <button id="logout" onClick={this.logOut}>logout</button>
+          <button id="logout" onClick={this.logOut}>Logout</button>
         </div>
       )
     }

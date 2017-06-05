@@ -36,7 +36,7 @@ export class QuestionPage extends React.Component {
                   <input id="input" type="text" ref="answer"/>
                   <button id="inputbtn" type="submit">submit</button>
                   </form>
-                  <button id="logout" onClick={this.logOut}>logout</button>
+                  <button id="logout" onClick={this.logOut}>Logout</button>
               </div>
           )
         } else {
