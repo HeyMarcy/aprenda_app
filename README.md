@@ -42,3 +42,6 @@ Next, in your internet browser type localhost:8080 and voilà. You're all set to
  * React
  * Redux
  * React-Router
+ 
+ ### Deployment
+ https://calm-depths-14672.herokuapp.com/
